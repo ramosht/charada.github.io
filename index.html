@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reset.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="content">
+                <h1>Será que você consegue adivinhar?</h1>
+        
+                <div class="charada">
+                    <span>Caixinha sem dobradiça, tampa ou cadeado</span>
+                    <span>Lá dentro escondido um tesouro dourado</span>
+                    <span>O que sou eu?</span>
+                </div>
+            </div>
+            <div class="formWrapper">
+                <div class="form">
+                    <input id="resposta" type='text' name="resposta" placeholder="Eu sou..."/>
+                    <span class="respostaBackground"></span>
+                </div>
+                <button onclick="test()" class="submit">
+                    <img src="src/search.png" />
+                </button>
+            </div>
+            <div class="meme">
+                <img id="memeSRC" src/>
+                <span id="memeMSG"></span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        var memes = [
+            './src/memes/01.webp',
+            './src/memes/02.webp',
+            './src/memes/03.webp',
+            './src/memes/04.webp',
+            './src/memes/05.webp',
+            './src/memes/06.webp',
+            './src/memes/07.webp',
+            './src/memes/08.webp',
+            './src/memes/09.webp',
+            './src/memes/10.webp',
+            './src/memes/11.webp',
+            './src/memes/12.webp',
+            './src/memes/13.webp',
+            './src/memes/14.webp',
+            './src/memes/15.webp',
+            './src/memes/16.webp',
+            './src/memes/17.webp',
+        ];
+
+        var mensagens = [
+            'Errou',
+            'Errado',
+            'Vish',
+            'Nah',
+            'Nem',
+            'kkkkkkkkkkkkkkkkkkkk',
+            'Tenta mais uma',
+        ];
+        
+        function test() {
+            var respostaCorreta = "ovo"
+
+            var respostaPessoa = document.getElementById('resposta').value.toLowerCase();
+
+            if(respostaPessoa.length > 0) {
+                if(respostaPessoa === respostaCorreta) {
+                    console.log('asidjai')
+                } else {
+                    const randomNumberMeme = Math.floor(Math.random() * (memes.length - 1 + 1) + 0)
+                    const randomNumberMsg = Math.floor(Math.random() * (mensagens.length - 1 + 1) + 0)
+    
+                    const memeEscolhido = memes[randomNumberMeme];
+                    const msgEscolhida = memes[randomNumberMsg];
+    
+                    const memeImage = document.querySelector('#memeSRC')
+                    const memeMessage = document.querySelector('#memeMSG')
+    
+                    memeImage.setAttribute('src', memeEscolhido)
+                    memeMessage.innerHTML = mensagens[randomNumberMsg]
+
+                    document.getElementById('resposta').value = ''
+                }
+            }
+        }
+    </script>
+</body>
+</html>
