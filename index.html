@@ -4,33 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Charada Amigo da Onça</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="reset.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
     <main>
         <div class="container">
             <div class="content">
-                <h1>Será que você consegue adivinhar?</h1>
+                <h1>Can you guess what am I?</h1>
         
                 <div class="charada">
-                    <span>Caixinha sem dobradiça, tampa ou cadeado</span>
-                    <span>Lá dentro escondido um tesouro dourado</span>
-                    <span>O que sou eu?</span>
+                    <span>I can fly but have no wings,</span>
+                    <span>I cry but I have no eyes,</span>
+                    <span>Wherever I go, shadow follows me.</span>
+                    <span>What am I?</span>
+                      
                 </div>
             </div>
             <div class="formWrapper">
                 <div class="form">
-                    <input id="resposta" type='text' name="resposta" placeholder="Eu sou..."/>
+                    <input id="resposta" type='text' name="resposta" placeholder="I'm an..."/>
                     <span class="respostaBackground"></span>
                 </div>
                 <button onclick="test()" class="submit">
-                    <img src="src/search.png" />
+                    <img src="src/search.png" class="errado" />
                 </button>
             </div>
             <div class="meme">
@@ -41,6 +43,7 @@
     </main>
 
     <script>
+        var wrongAnswersCounter = 0;
         var memes = [
             './src/memes/01.webp',
             './src/memes/02.webp',
@@ -62,37 +65,53 @@
         ];
 
         var mensagens = [
-            'Errou',
-            'Errado',
-            'Vish',
-            'Nah',
-            'Nem',
-            'kkkkkkkkkkkkkkkkkkkk',
-            'Tenta mais uma',
+            'Vish, errou 😬',
+            'Nah, wrong 😊',
+            'Vish, wrong 😳',
+            'nope, not this time 😘',
+            'Nem 🙃',
+            'LOL! Wrong 🥸',
+            'Try again 😎',
+            '🤣🤣🤣🤣🤣 nah, not this time',
+            'not today 🙅🏻‍♂️'
         ];
         
         function test() {
-            var respostaCorreta = "ovo"
-
+            var respostaCorreta = ["cloud", "clouds"]
             var respostaPessoa = document.getElementById('resposta').value.toLowerCase();
 
             if(respostaPessoa.length > 0) {
-                if(respostaPessoa === respostaCorreta) {
-                    console.log('asidjai')
+                if(wrongAnswersCounter < 10) {
+                    wrongAnswersCounter++;
+                    if(respostaCorreta.includes(respostaPessoa)) {
+                        const memeImage = document.querySelector('#memeSRC')
+                        const memeMessage = document.querySelector('#memeMSG')
+        
+                        memeImage.setAttribute('src', './src/memes/acertou.webp')
+                        memeMessage.innerHTML = "Congratulations! You\'re right, it's an egg. Now comes your prize: the code for the <span class='strong'>498</span>"
+                        document.getElementById('resposta').setAttribute('disabled', 'true')
+                    } else {
+                        const randomNumberMeme = Math.floor(Math.random() * (memes.length - 1 + 1) + 0)
+                        const randomNumberMsg = Math.floor(Math.random() * (mensagens.length - 1 + 1) + 0)
+        
+                        const memeEscolhido = memes[randomNumberMeme];
+                        const msgEscolhida = memes[randomNumberMsg];
+        
+                        const memeImage = document.querySelector('#memeSRC')
+                        const memeMessage = document.querySelector('#memeMSG')
+        
+                        memeImage.setAttribute('src', memeEscolhido)
+                        memeMessage.innerHTML = mensagens[randomNumberMsg]
+    
+                        document.getElementById('resposta').value = ''
+                    }
                 } else {
-                    const randomNumberMeme = Math.floor(Math.random() * (memes.length - 1 + 1) + 0)
-                    const randomNumberMsg = Math.floor(Math.random() * (mensagens.length - 1 + 1) + 0)
-    
-                    const memeEscolhido = memes[randomNumberMeme];
-                    const msgEscolhida = memes[randomNumberMsg];
-    
                     const memeImage = document.querySelector('#memeSRC')
-                    const memeMessage = document.querySelector('#memeMSG')
-    
-                    memeImage.setAttribute('src', memeEscolhido)
-                    memeMessage.innerHTML = mensagens[randomNumberMsg]
-
-                    document.getElementById('resposta').value = ''
+                        const memeMessage = document.querySelector('#memeMSG')
+        
+                        memeImage.setAttribute('src', './src/memes/acertou.webp')
+                        memeMessage.innerHTML = "Ohh! You're wrong again. But you're a great person, so I gonna tell you the answer: it's egg. Now, the code to open the padlock is <span class='strong'>498</span>"
+                        document.getElementById('resposta').setAttribute('disabled', 'true')
                 }
             }
         }

@@ -2,7 +2,8 @@
   font-family: "Libre Baskerville";
 }
 
-body {
+body,
+html {
   background-image: url("./src/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -98,6 +99,7 @@ button.submit {
   background-color: transparent;
   border: none;
   width: 32px;
+  padding: 20px;
 }
 
 button.submit:hover {
@@ -105,7 +107,7 @@ button.submit:hover {
 }
 
 button.submit img {
-  max-width: 100%;
+  width: 32px;
 }
 
 .meme {
@@ -118,6 +120,14 @@ button.submit img {
 .meme img {
   margin-top: 2rem;
   margin-bottom: 1rem;
-  width: 100%;
-  max-width: 25rem;
+  width: 10rem;
+}
+
+#memeMSG {
+  text-align: center;
+  line-height: 1.5;
+}
+
+.strong {
+  font-weight: bold;
 }
