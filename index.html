@@ -78,7 +78,7 @@
         
         function test() {
             var respostaCorreta = ["cloud", "clouds"]
-            var respostaPessoa = document.getElementById('resposta').value.toLowerCase();
+            var respostaPessoa = document.getElementById('resposta').value.toLowerCase().trim();
 
             if(respostaPessoa.length > 0) {
                 if(wrongAnswersCounter < 10) {
