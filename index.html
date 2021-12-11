@@ -23,7 +23,10 @@
                     <span>I cry but I have no eyes,</span>
                     <span>Wherever I go, shadow follows me.</span>
                     <span>What am I?</span>
-                      
+                </div>
+
+                <div class="tentativasRestantes">
+                    You have <span id="tentativasRestantesNumero">3</span> remaining attempts
                 </div>
             </div>
             <div class="formWrapper">
@@ -43,7 +46,6 @@
     </main>
 
     <script>
-        var wrongAnswersCounter = 0;
         var memes = [
             './src/memes/01.webp',
             './src/memes/02.webp',
@@ -79,10 +81,10 @@
         function test() {
             var respostaCorreta = ["cloud", "clouds"]
             var respostaPessoa = document.getElementById('resposta').value.toLowerCase().trim();
-
+            var remainingAttemptNumber = Number(document.getElementById('tentativasRestantesNumero').innerText)
+            
             if(respostaPessoa.length > 0) {
-                if(wrongAnswersCounter < 10) {
-                    wrongAnswersCounter++;
+                if(remainingAttemptNumber > 0) {
                     if(respostaCorreta.includes(respostaPessoa)) {
                         const memeImage = document.querySelector('#memeSRC')
                         const memeMessage = document.querySelector('#memeMSG')
@@ -91,6 +93,9 @@
                         memeMessage.innerHTML = "Congratulations! You're right, it's an cloud. Now comes your prize: the code for the padlock <span class='strong'>498</span>"
                         document.getElementById('resposta').setAttribute('disabled', 'true')
                     } else {
+                        const tentativasRestantesNumeroNode = document.getElementById('tentativasRestantesNumero');
+                        tentativasRestantesNumeroNode.innerHTML = remainingAttemptNumber - 1
+
                         const randomNumberMeme = Math.floor(Math.random() * (memes.length - 1 + 1) + 0)
                         const randomNumberMsg = Math.floor(Math.random() * (mensagens.length - 1 + 1) + 0)
         
